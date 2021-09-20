@@ -1,0 +1,62 @@
+description: >
+  Delete a Tag from an Object
+
+parameters:
+  tool_path:
+    type: string
+    default: ""
+    description: "Path where the DBmaestroAgent.jar is located"
+  package_name:
+    type: string
+    description: "DBmaestro package name"
+  project_name:
+    type: string
+    description: "DBmaestro project name"
+  tag_type_name:
+    type: string
+    description: "DBmaestro tag type name."
+  tag_name:
+    type: string
+    description: "DBmaestro tag name."
+  object_type_name:
+    type: string
+    default: ""
+    description: "DBmaestro object type name."
+  object_name:
+    type: string
+    default: ""
+    description: "DBmaestro object name."
+  server_address:
+    type: string
+    default: ""
+    description: "DBmaestro server address"
+  use_ssl:
+    type: enum
+    description: "Use or don't use SSL/https protocol to connect to the DBmaestro agent. Default is n."
+    default: ""
+    enum: ["y", "n", ""]
+  auth_type:
+    type: enum
+    default: ""
+    description: "DBmaestro auth type"
+    enum: ["DBmaestroAccount", "DomainLogin", ""]
+  username:
+    type: string
+    default: ""
+    description: "DBmaestro username"
+steps:
+  - run:
+      environment:
+        DBM_TOOL_PATH: << parameters.tool_path >>
+        DBM_PROJECT_NAME: << parameters.project_name >>
+        DBM_PACKAGE_NAME: << parameters.package_name >>
+        DBM_TAG_TYPE_NAME: << parameters.tag_type_name >>
+        DBM_TAG_NAME: << parameters.tag_name >>
+        DBM_OBJECT_TYPE_NAME: << parameters.object_type_name >>
+        DBM_OBJECT_NAME: << parameters.object_name >>
+        DBM_SERVER_ADDRESS: << parameters.server_address >>
+        DBM_USE_SSL: << parameters.use_ssl >>
+        DBM_AUTH_TYPE: << parameters.auth_type >>
+        DBM_USERNAME: << parameters.username >>
+      name: Delete tag
+      command: <<include(scripts/delete-tag.sh)>>

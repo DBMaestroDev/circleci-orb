@@ -1,0 +1,37 @@
+description: >
+  Create or Update a Package manifest file
+
+parameters:
+  tool_path:
+    type: string
+    default: ""
+    description: "Path where the DBmaestroAgent.jar is located"
+  path_to_scripts_folder:
+    type: string
+    description: "Path to sripts folder"
+  operation:
+    type: enum
+    description: "Package operation"
+    default: "CreateOrUpdate"
+    enum: ["CreateOrUpdate", "Create", "Update"]
+  scripts_order_scope:
+    type: enum
+    description: "Scripts order scope"
+    default: "Global"
+    enum: ["Global", "Schema"]
+steps:
+  - run:
+      environment:
+        DBM_TOOL_PATH: << parameters.tool_path >>
+        DBM_PATH_TO_SCRIPTS_FOLDER: << parameters.path_to_scripts_folder >>
+        DBM_OPERATION: << parameters.operation >>
+        DBM_SCRIPTS_ORDER_SCOPE: << parameters.scripts_order_scope >>
+      name: Create manifest file
+      command: |
+        if [ -z "${DBM_TOOL_PATH:=${DBMAESTRO_TOOL_PATH:-'tools/dbmaestro'}}" ]; then echo "DBmaestro tool path is not set"&&exit 1; fi
+        if [ -z "${DBM_SERVER_ADDRESS:=$DBMAESTRO_SERVER_ADDRESS}" ]; then echo "DBmaestro server address is not set"&&exit 1; fi
+        if [ -z "${DBM_USE_SSL:=${DBMAESTRO_USE_SSL:-n}}" ]; then echo "DBmaestro SSL usage is not set"&&exit 1; fi
+        if [ -z "${DBM_AUTH_TYPE:=${DBMAESTRO_AUTH_TYPE:-DBmaestroAccount}}" ]; then echo "DBmaestro auth type is not set"&&exit 1; fi
+        if [ -z "${DBM_USERNAME:=$DBMAESTRO_USERNAME}" ]; then echo "DBmaestro username is not set"&&exit 1; fi
+        if [ -z "$DBMAESTRO_PASSWORD" ]; then echo "DBMAESTRO_PASSWORD variable is not set"&&exit 1; fi
+        java -jar "$DBM_TOOL_PATH/DBmaestroAgent.jar" -CreateManifestFile -PathToScriptsFolder "$DBM_PATH_TO_SCRIPTS_FOLDER" -Operation "$DBM_OPERATION" -ScriptsOrderScope "$DBM_SCRIPTS_ORDER_SCOPE"

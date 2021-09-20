@@ -1,0 +1,277 @@
+{
+  "ProjectGroupId": null,
+  "ProjectId": 3,
+  "ProjectName": "DEMO",
+  "Description": "",
+  "ScriptSource": null,
+  "ProjectType": "deploy by versions",
+  "AutoImportScript": false,
+  "AutoImportScriptInterval": 0.0,
+  "AutoPackage": false,
+  "AutoPackageInterval": 0.0,
+  "DatabaseType": "MS-SQL",
+  "ConnectToCMS": false,
+  "cmsId": null,
+  "cmsType": null,
+  "CMSName": null,
+  "CMSProjectName": null,
+  "EnableSuperUser": false,
+  "canEditPackageScripts": true,
+  "autoDriftDetectionIntervalMintues": 240,
+  "Options": {
+    "DegreeParallel": 5,
+    "DetectCompilationWarnings": false,
+    "SkipPreValidation": false,
+    "ObjectDegreeParallel": 5,
+    "FileModelId": 1,
+    "RequireConfirmationOnUpgrade": true,
+    "FileExtensions": "",
+    "FileVersionControlType": "0",
+    "SkipPostValidation": true,
+    "BuildParallel": true,
+    "DetectDefaultCompilationErrors": false,
+    "SaveEncoding": 1255,
+    "UpdateSourceControlParallel": true,
+    "ContinuousIntegrationType": "0",
+    "ConflictResolveAction": "Abort",
+    "ValidateParallel": true,
+    "UseDowngradeScripts": false,
+    "RequireDowngradeScripts": false,
+    "SkipSchemaValidation": true,
+    "BackupRestoreParallel": true,
+    "SourceControlPathType": 0,
+    "ApplyLabelParallel": true,
+    "DryRunParallel": true,
+    "BreakOnDowngradeFailed": false,
+    "SourceControlFolder": "",
+    "SkipConnectionCheck": true
+  },
+  "AdditionalOptions": null,
+  "AdvancedProperties": {
+    "IgnoreDefaultSchema": false,
+    "IgnoreColumnOrder": false,
+    "IgnoreWithNocheckOnForeignKeys": false,
+    "Do Not Drop DB types": null,
+    "FailDeploymentWhenUnknownVariableFound": false,
+    "AllowUnsafeRowLevelSecurityDataMovement": false,
+    "DeployDatabaseInSingleUserMode": false,
+    "IgnoreWithNocheckOnCheckConstraints": false,
+    "IgnoreAuthorizer": false,
+    "ScriptFileSize": false,
+    "AdditionalDeploymentContributorArguments": null,
+    "ExportRelevantDatabases": false,
+    "IgnoreFileAndLogFilePath": true,
+    "IgnoreIncrement": false,
+    "AdditionalDeploymentContributors": null,
+    "TestConnectionBeforeJob": false,
+    "ScriptRefreshModule": true,
+    "IgnoreComments": true,
+    "PreRunDataTables": null,
+    "FailOnDacPacError": true,
+    "ScriptDeployStateChecks": false,
+    "BlockOnPossibleDataLoss": false,
+    "VerifyCollationCompatibility": true,
+    "IgnoreWhitespace": true,
+    "AllowDropBlockingAssemblies": false,
+    "CompareUsingTargetCollation": false,
+    "IncludeCompositeObjects": false,
+    "ScriptDatabaseOptions": false,
+    "IgnoreTableOptions": false,
+    "UnmodifiableObjectWarnings": false,
+    "IgnorePartitionSchemes": false,
+    "PreRunExternalTool": "DacPac",
+    "PreRunExpImpContentMode": "ALL",
+    "DoNotAlterReplicatedObjects": true,
+    "IgnoreUserSettingsObjects": false,
+    "IgnoreExtendedProperties": false,
+    "PopulateFilesOnFileGroups": false,
+    "TreatVerificationErrorsAsWarnings": false,
+    "IgnorePermissions": true,
+    "DisableAndReenableDdlTriggers": true,
+    "IgnoreSemicolonBetweenStatements": true,
+    "ScriptNewConstraintValidation": true,
+    "AllowIncompatiblePlatform": false,
+    "CommandTimeout": 60.0,
+    "IgnoreQuotedIdentifiers": true,
+    "SchemaMappingFile": null,
+    "IgnoreCryptographicProviderFilePath": true,
+    "IgnoreDdlTriggerOrder": false,
+    "IgnoreKeywordCasing": true,
+    "IncludeTransactionalScripts": false,
+    "Exclude DB types": [
+      "ServerTriggers",
+      "Routes",
+      "LinkedServerLogins",
+      "Endpoints",
+      "ErrorMessages",
+      "Logins",
+      "LinkedServers",
+      "Credentials",
+      "DatabaseScopedCredentials",
+      "DatabaseEncryptionKeys",
+      "MasterKeys",
+      "DatabaseAuditSpecifications",
+      "Audits",
+      "ServerAuditSpecifications",
+      "CryptographicProviders",
+      "ServerRoles",
+      "EventSessions",
+      "DatabaseOptions",
+      "EventNotifications",
+      "ServerRoleMembership",
+      "AssemblyFiles",
+      "Users",
+      "RoleMembership",
+      "Filegroups",
+      "Files",
+      "DatabaseRoles",
+      "ApplicationRoles"
+    ],
+    "RunDeploymentPlanExecutors": false,
+    "DoNotAlterChangeDataCaptureObjects": true,
+    "IgnoreIndexOptions": true,
+    "IgnoreLockHintsOnIndexes": false,
+    "ScriptDatabaseCollation": false,
+    "IgnoreDmlTriggerState": false,
+    "VerifyDeployment": true,
+    "WriteVariableValuesToActionLogs": true,
+    "IgnoreColumnCollation": false,
+    "NoAlterStatementsToChangeClrTypes": false,
+    "Sql Command Values": null,
+    "RegisterDataTierApplication": false,
+    "IgnoreDdlTriggerState": false,
+    "GetDependencies": true,
+    "AdditionalCommandLineArguments": "",
+    "IgnoreDmlTriggerOrder": false,
+    "ScriptDatabaseCompatibility": false,
+    "IgnoreIndexPadding": true,
+    "IgnoreRoleMembership": false,
+    "IgnoreNotForReplication": false
+  },
+  "EnvironmentTypes": [
+    {
+      "Name": "Dev",
+      "Environments": [
+        {
+          "EnvironmentId": 30,
+          "EnvironmentName": "Dev_Env_1",
+          "EnvironmentDescription": null,
+          "ComparisonType": null,
+          "SuperUser": null,
+          "Schemas": [
+            {
+              "Name": "DEV_BYTASK",
+              "SchemaCredentials": {
+                "password": "1q2w3e4R",
+                "dbName": "DEV_BYTASK",
+                "host": "localhost",
+                "authType": "1",
+                "userName": "sa",
+                "vaultId": 0,
+                "vaultName": null
+              },
+              "Order": 1,
+              "SchemaId": 3,
+              "IsManaged": false,
+              "IsSuperUser": false
+            }
+          ]
+        }
+      ],
+      "DriftDetection": false
+    },
+    {
+      "Name": "DryRun",
+      "Environments": [
+	  {
+          "EnvironmentId": 40,
+          "EnvironmentName": "DryRun1",
+          "EnvironmentDescription": null,
+          "ComparisonType": null,
+          "SuperUser": null,
+          "Schemas": [
+            {
+              "Name": "DR",
+              "SchemaCredentials": {
+                "password": "1q2w3e4R",
+                "dbName": "DR",
+                "host": "localhost",
+                "authType": "1",
+                "userName": "sa",
+                "vaultId": 0,
+                "vaultName": null
+              },
+              "Order": 1,
+              "SchemaId": 40,
+              "IsManaged": false,
+              "IsSuperUser": false
+            }
+          ]
+        }],
+      "DriftDetection": false
+    },
+    {
+      "Name": "Release Source",
+      "Environments": [
+        {
+          "EnvironmentId": 45,
+          "EnvironmentName": "Release Source",
+          "EnvironmentDescription": null,
+          "ComparisonType": null,
+          "SuperUser": null,
+          "Schemas": [
+            {
+              "Name": "RS_BYTASK",
+              "SchemaCredentials": {
+                "password": "1q2w3e4R",
+                "dbName": "RS_BYTASK",
+                "host": "localhost",
+                "authType": "1",
+                "userName": "sa",
+                "vaultId": 0,
+                "vaultName": null
+              },
+              "Order": 1,
+              "SchemaId": 45,
+              "IsManaged": false,
+              "IsSuperUser": false
+            }
+          ]
+        }
+      ],
+      "DriftDetection": false
+    },
+    {
+      "Name": "QA",
+      "Environments": [],
+      "DriftDetection": false
+    },
+    {
+      "Name": "UAT",
+      "Environments": [],
+      "DriftDetection": false
+    },
+    {
+      "Name": "Pre_Prod",
+      "Environments": [],
+      "DriftDetection": false
+    },
+    {
+      "Name": "Prod",
+      "Environments": [],
+      "DriftDetection": false
+    }
+  ],
+  "Hooks": [],
+  "BackupSettings": [
+    {
+      "Env": null,
+      "EnvType": null,
+      "StoragePath": "",
+      "SaveBackups": null,
+      "SizeBackups": null,
+      "BackupBehavior": "Don\u0027t create",
+      "RestoreBehavior": "Don\u0027t restore"
+    }
+  ]
+}

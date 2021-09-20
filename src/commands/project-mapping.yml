@@ -1,0 +1,63 @@
+description: >
+  Queue a Project Mapping to the DBmaestro DevOps Platform
+
+  - A Project Mapping must be constructed between two projects before the TransferUpPackage, TransferDownPackage or TransferPackage functions can be executed. The primary purpose of the mapping is to link schema differences between projects and enable constructing and managing a multi-project pipeline.
+
+parameters:
+  tool_path:
+    type: string
+    default: ""
+    description: "Path where the DBmaestroAgent.jar is located"
+  project_name:
+    type: string
+    description: "DBmaestro project name."
+  target_project_name:
+    type: string
+    description: "Target project name."
+  schema_map:
+    type: string
+    default: ""
+    description: "Link between source schema versus target schema. i.e. <'SchemaNameX1=SchemaNameY1,SchemaNameX2=SchemaNameY2...'>"
+  transfer_opened_package:
+    type: enum
+    description: "Allow transferring open packages in TransferUpPackage and TransferDownPackage functions"
+    default: "False"
+    enum: ["True", "False"]
+  keep_state:
+    type: enum
+    description: "Keep the state of the package"
+    default: "False"
+    enum: ["True", "False"]
+  server_address:
+    type: string
+    default: ""
+    description: "DBmaestro server address"
+  use_ssl:
+    type: enum
+    description: "Use or don't use SSL/https protocol to connect to the DBmaestro agent. Default is n."
+    default: ""
+    enum: ["y", "n", ""]
+  auth_type:
+    type: enum
+    default: ""
+    description: "DBmaestro auth type"
+    enum: ["DBmaestroAccount", "DomainLogin", ""]
+  username:
+    type: string
+    default: ""
+    description: "DBmaestro username"
+steps:
+  - run:
+      environment:
+        DBM_TOOL_PATH: << parameters.tool_path >>
+        DBM_PROJECT_NAME: << parameters.project_name >>
+        DBM_TARGET_PROJECT_NAME: << parameters.target_project_name >>
+        DBM_SCHEMA_MAP: << parameters.schema_map >>
+        DBM_TRANSFER_OPENED_PACKAGE: << parameters.transfer_opened_package >>
+        DBM_KEEP_STATE: << parameters.keep_state >>
+        DBM_SERVER_ADDRESS: << parameters.server_address >>
+        DBM_USE_SSL: << parameters.use_ssl >>
+        DBM_AUTH_TYPE: << parameters.auth_type >>
+        DBM_USERNAME: << parameters.username >>
+      name: Project mapping
+      command: <<include(scripts/project-mapping.sh)>>

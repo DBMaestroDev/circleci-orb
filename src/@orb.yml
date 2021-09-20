@@ -1,15 +1,15 @@
 version: 2.1
 
 description: >
-  Sample orb description
-# What will your orb allow users to accomplish?
-# Descriptions should be short, simple, and informative.
+  DBmaestro DevOps Platform, an enforced change management platform that automates and streamlines database development and deployment tasks. DBmaestro is the leading DevOps database solution provider for research and development organizations with multiple database vendors and environments.
+  DBmaestro brings true continuous delivery – complete with the practices proven to be most effective for application development – to the database. Our product transforms development operations by:
+    Dramatically increasing productivity
+    Reducing development costs
+    Adding a surefire safety net for database automation
+  These benefits are achieved by leveraging a guaranteed single point-of-truth source control system and a powerful impact analysis engine.
+  The DBmaestro DevOps Platform automates and streamlines database development and deployment tasks and provides a centralized system for managing database development. The automated deployment solution simplifies the process of deploying changes from development to integration environments. Integral to the design is a sophisticated permission-architecture for customizing roles and ensuring security.
 
-# This information will be displayed in the orb registry and is not mandatory.
 display:
-  home_url: "https://www.website.com/docs"
-  source_url: "https://www.github.com/EXAMPLE_ORG/EXAMPLE_PROJECT"
+  home_url: "https://dbmaestro.com"
+  source_url: "https://github.com/DBMaestroDev/circleci-orb"
 
-# If your orb requires other orbs, you can import them like this. Otherwise remove the "orbs" stanza.
-# orbs:
-#  hello: circleci/hello-build@0.0.5

@@ -1,0 +1,59 @@
+description: >
+  Queue a Backup Environment Job
+
+parameters:
+  tool_path:
+    type: string
+    default: ""
+    description: "Path where the DBmaestroAgent.jar is located"
+  project_name:
+    type: string
+    description: "DBmaestro project name"
+  environment_name:
+    type: string
+    description: "DBmaestro environment name"
+  backup_name:
+    type: string
+    description: "Backup name."
+  backup_description:
+    type: string
+    default: ""
+    description: "Backup description."
+  ignore_env_version_mismatch:
+    type: enum
+    default: "True"
+    description: "Ignore environment version mismatch"
+    enum: ["True", "False"]
+  server_address:
+    type: string
+    default: ""
+    description: "DBmaestro server address"
+  use_ssl:
+    type: enum
+    description: "Use or don't use SSL/https protocol to connect to the DBmaestro agent. Default is n."
+    default: ""
+    enum: ["y", "n", ""]
+  auth_type:
+    type: enum
+    default: ""
+    description: "DBmaestro auth type"
+    enum: ["DBmaestroAccount", "DomainLogin", ""]
+  username:
+    type: string
+    default: ""
+    description: "DBmaestro username"
+steps:
+  - run:
+      environment:
+        DBM_TOOL_PATH: << parameters.tool_path >>
+        DBM_PROJECT_NAME: << parameters.project_name >>
+        DBM_ENVIRONMENT_NAME: << parameters.environment_name >>
+        DBM_BACKUP_NAME: << parameters.backup_name >>
+        DBM_BACKUP_DESCRIPTION: << parameters.backup_description >>
+        DBM_IGNORE_ENV_VERSION_MISMATCH: << parameters.ignore_env_version_mismatch >>
+        DBM_SERVER_ADDRESS: << parameters.server_address >>
+        DBM_USE_SSL: << parameters.use_ssl >>
+        DBM_AUTH_TYPE: << parameters.auth_type >>
+        DBM_USERNAME: << parameters.username >>
+      name: Backup environment
+      command: <<include(scripts/backup-environment.sh)>>

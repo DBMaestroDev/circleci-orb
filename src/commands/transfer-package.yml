@@ -1,0 +1,61 @@
+description: >
+  Queue a Project Transfer Job to the DBmaestro DevOps Platform
+
+  - A Project Mapping must have been created before the TransferPackage function can be executed.
+
+parameters:
+  tool_path:
+    type: string
+    default: ""
+    description: "Path where the DBmaestroAgent.jar is located"
+  project_name:
+    type: string
+    description: "DBmaestro project name"
+  target_project_name:
+    type: string
+    description: "Target project name"
+  source_package:
+    type: string
+    description: "Source package name"
+  target_package:
+    type: string
+    default: ""
+    description: "Target package name"
+  version_level:
+    type: enum
+    default: ""
+    description: "MAJOR or MINOR"
+    enum: ["MAJOR", "MINOR", ""]
+  server_address:
+    type: string
+    default: ""
+    description: "DBmaestro server address"
+  use_ssl:
+    type: enum
+    description: "Use or don't use SSL/https protocol to connect to the DBmaestro agent. Default is n."
+    default: ""
+    enum: ["y", "n", ""]
+  auth_type:
+    type: enum
+    default: ""
+    description: "DBmaestro auth type"
+    enum: ["DBmaestroAccount", "DomainLogin", ""]
+  username:
+    type: string
+    default: ""
+    description: "DBmaestro username"
+steps:
+  - run:
+      environment:
+        DBM_TOOL_PATH: << parameters.tool_path >>
+        DBM_PROJECT_NAME: << parameters.project_name >>
+        DBM_TARGET_PROJECT_NAME: << parameters.target_project_name >>
+        DBM_SOURCE_PACKAGE: << parameters.source_package >>
+        DBM_TARGET_PACKAGE: << parameters.target_package >>
+        DBM_VERSION_LEVEL: << parameters.version_level >>
+        DBM_SERVER_ADDRESS: << parameters.server_address >>
+        DBM_USE_SSL: << parameters.use_ssl >>
+        DBM_AUTH_TYPE: << parameters.auth_type >>
+        DBM_USERNAME: << parameters.username >>
+      name: Transfer package
+      command: <<include(scripts/transfer-package.sh)>>

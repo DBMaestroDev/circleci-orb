@@ -1,0 +1,57 @@
+description: >
+  This job will create project package by Buid, deploy it to the Release source and QA environments
+  Then - transfer this package to "Release" project and deployed to Release Source and Production
+
+  Job description
+    1. Package is created using build command for environment Dev_Env_1 for project "Development"
+    2. Release source is being updated to the latest version using update command at project "Development"
+    3. Same package is being deployed to the QA environment at project "Development"
+    4. Package is being transferred to the project "Release"
+    5. Release source at project "Release" is being updated to the latest version using update command
+    6. Finally, package is being deployed to the Production environment (Prod_Env_1) of "Release" project
+usage:
+  version: 2.1
+  orbs:
+    dop: dbmaestro/devops-automation@0.0.7
+
+workflows:
+  test-run:
+    jobs:
+      - dbm-deploy
+
+jobs:
+  dbm-deploy:
+    docker:
+      - image: cimg/openjdk:16.0.2
+    environment:
+      DBMAESTRO_SERVER_ADDRESS: "dbm.automation.host:8017"
+      DBMAESTRO_USERNAME: "test@dbmaestro.com"
+      DBMAESTRO_AUTH_TYPE: "DBmaestroAccount"
+    steps:
+      - checkout
+      - dop/download-automation-jar
+      - dop/build:
+          project_name: "Development"
+          environment_name: "Dev_Env_1"
+          version_level: "MAJOR"
+      - dop/upgrade:
+          project_name: "Development"
+          environment_name: "Release Source"
+          package_name: "@latestversion"
+      - dop/upgrade:
+          project_name: "Development"
+          environment_name: "QA_Env_1"
+          package_name: "@latestversion"
+      - dop/transfer-up-package:
+          project_name: "Development"
+          target_project_name: "Release"
+          source_package: "@latestversion"
+          version_level: "MINOR"
+      - dop/upgrade:
+          project_name: "Release"
+          environment_name: "Release Source"
+          package_name: "@latestversion"
+      - dop/upgrade:
+          project_name: "Release"
+          environment_name: "Prod_Env_1"
+          package_name: "@latestversion"

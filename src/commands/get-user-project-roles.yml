@@ -1,0 +1,47 @@
+description: >
+  Retrieve all DBmaestro users and roles listed by project and save in a .csv file
+
+parameters:
+  tool_path:
+    type: string
+    default: ""
+    description: "Path where the DBmaestroAgent.jar is located"
+  file_path:
+    type: string
+    description: "Full .json file path to project."
+  server_address:
+    type: string
+    default: ""
+    description: "DBmaestro server address"
+  use_ssl:
+    type: enum
+    description: "Use or don't use SSL/https protocol to connect to the DBmaestro agent. Default is n."
+    default: ""
+    enum: ["y", "n", ""]
+  auth_type:
+    type: enum
+    default: ""
+    description: "DBmaestro auth type"
+    enum: ["DBmaestroAccount", "DomainLogin", ""]
+  username:
+    type: string
+    default: ""
+    description: "DBmaestro username"
+steps:
+  - run:
+      environment:
+        DBM_TOOL_PATH: << parameters.tool_path >>
+        DBM_FILE_PATH: << parameters.file_path >>
+        DBM_SERVER_ADDRESS: << parameters.server_address >>
+        DBM_USE_SSL: << parameters.use_ssl >>
+        DBM_AUTH_TYPE: << parameters.auth_type >>
+        DBM_USERNAME: << parameters.username >>
+      name: Get users-projects-roles mappings
+      command: |
+        if [ -z "${DBM_TOOL_PATH:=${DBMAESTRO_TOOL_PATH:-'tools/dbmaestro'}}" ]; then echo "DBmaestro tool path is not set"&&exit 1; fi
+        if [ -z "${DBM_SERVER_ADDRESS:=$DBMAESTRO_SERVER_ADDRESS}" ]; then echo "DBmaestro server address is not set"&&exit 1; fi
+        if [ -z "${DBM_USE_SSL:=${DBMAESTRO_USE_SSL:-n}}" ]; then echo "DBmaestro SSL usage is not set"&&exit 1; fi
+        if [ -z "${DBM_AUTH_TYPE:=${DBMAESTRO_AUTH_TYPE:-DBmaestroAccount}}" ]; then echo "DBmaestro auth type is not set"&&exit 1; fi
+        if [ -z "${DBM_USERNAME:=$DBMAESTRO_USERNAME}" ]; then echo "DBmaestro username is not set"&&exit 1; fi
+        if [ -z "$DBMAESTRO_PASSWORD" ]; then echo "DBMAESTRO_PASSWORD variable is not set"&&exit 1; fi
+        java -jar "$DBM_TOOL_PATH/DBmaestroAgent.jar" -GetUserProjectRoles -FilePath "$DBM_FILE_PATH" -Server "$DBM_SERVER_ADDRESS" -AuthType "$DBM_AUTH_TYPE" -UserName "$DBM_USERNAME" -Password "$DBMAESTRO_PASSWORD"

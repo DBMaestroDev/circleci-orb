@@ -1,0 +1,48 @@
+description: >
+  This job will create project package from user created scripts and a package manifest using the Package command, and then deploy it to the Release source.
+
+  The package manifest is a .json file named Package.json consisting of a header section and an array of script sections in the order in which the scripts should be executed when an environment is upgraded or downgraded. The upgrade and downgrade scripts are stored in the Upgrade and Downgrade directories respectively. These two directories are subdirectories of another directory. Details are specified in https://dbmaestro.atlassian.net/wiki/spaces/DBm20Docs/pages/1173331919/Generating+Project+Packages+by+Automation
+
+  Job description
+    1. Package manifest is created using create-manifest command
+    2. Package folder is being zipped
+    3. New package is being imported to DBmaestro using package command
+    4. Package is being pre-checked using pre-check command
+    5. Release source is being updated using update command
+
+usage:
+  version: 2.1
+  orbs:
+    dop: dbmaestro/devops-automation@0.0.7
+
+workflows:
+  test-run:
+    jobs:
+      - dbm-deploy
+
+jobs:
+  dbm-deploy:
+    docker:
+      - image: cimg/openjdk:16.0.2
+    environment:
+      DBMAESTRO_SERVER_ADDRESS: "dbm.automation.host:8017"
+      DBMAESTRO_USERNAME: "test@dbmaestro.com"
+      DBMAESTRO_AUTH_TYPE: "DBmaestroAccount"
+    steps:
+      - checkout
+      - dop/download-automation-jar
+      - dop/create-manifest-file:
+          path_to_scripts_folder: "V3"
+      - run:
+        command: cd V3&&zip -r ../V3.zip *&&cd ..
+        name: Zip the package
+      - dop/package:
+          project_name: "DEMO"
+          file_path: "V3.zip"
+      - dop/pre-check:
+          project_name: "DEMO"
+          package_name: "V3"
+      - dop/upgrade:
+          project_name: "DEMO"
+          environment_name: "Release Source"
+          package_name: "V3"
