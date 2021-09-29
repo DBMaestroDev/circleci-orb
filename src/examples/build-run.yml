@@ -13,12 +13,6 @@ usage:
   version: 2.1
   orbs:
     dop: dbmaestro/devops-automation@0.0.7
-
-  workflows:
-    test-run:
-      jobs:
-        - dbm-deploy
-
   jobs:
     dbm-deploy:
       docker:
@@ -55,3 +49,7 @@ usage:
             project_name: "Release"
             environment_name: "Prod_Env_1"
             package_name: "@latestversion"
+  workflows:
+    test-run:
+      jobs:
+        - dbm-deploy  
