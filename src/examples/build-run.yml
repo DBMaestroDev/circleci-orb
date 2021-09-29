@@ -52,4 +52,4 @@ usage:
   workflows:
     test-run:
       jobs:
-        - dbm-deploy  
+        - dbm-deploy
