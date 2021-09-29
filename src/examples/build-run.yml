@@ -14,44 +14,44 @@ usage:
   orbs:
     dop: dbmaestro/devops-automation@0.0.7
 
-workflows:
-  test-run:
-    jobs:
-      - dbm-deploy
+  workflows:
+    test-run:
+      jobs:
+        - dbm-deploy
 
-jobs:
-  dbm-deploy:
-    docker:
-      - image: cimg/openjdk:16.0.2
-    environment:
-      DBMAESTRO_SERVER_ADDRESS: "dbm.automation.host:8017"
-      DBMAESTRO_USERNAME: "test@dbmaestro.com"
-      DBMAESTRO_AUTH_TYPE: "DBmaestroAccount"
-    steps:
-      - checkout
-      - dop/download-automation-jar
-      - dop/build:
-          project_name: "Development"
-          environment_name: "Dev_Env_1"
-          version_level: "MAJOR"
-      - dop/upgrade:
-          project_name: "Development"
-          environment_name: "Release Source"
-          package_name: "@latestversion"
-      - dop/upgrade:
-          project_name: "Development"
-          environment_name: "QA_Env_1"
-          package_name: "@latestversion"
-      - dop/transfer-up-package:
-          project_name: "Development"
-          target_project_name: "Release"
-          source_package: "@latestversion"
-          version_level: "MINOR"
-      - dop/upgrade:
-          project_name: "Release"
-          environment_name: "Release Source"
-          package_name: "@latestversion"
-      - dop/upgrade:
-          project_name: "Release"
-          environment_name: "Prod_Env_1"
-          package_name: "@latestversion"
+  jobs:
+    dbm-deploy:
+      docker:
+        - image: cimg/openjdk:16.0.2
+      environment:
+        DBMAESTRO_SERVER_ADDRESS: "dbm.automation.host:8017"
+        DBMAESTRO_USERNAME: "test@dbmaestro.com"
+        DBMAESTRO_AUTH_TYPE: "DBmaestroAccount"
+      steps:
+        - checkout
+        - dop/download-automation-jar
+        - dop/build:
+            project_name: "Development"
+            environment_name: "Dev_Env_1"
+            version_level: "MAJOR"
+        - dop/upgrade:
+            project_name: "Development"
+            environment_name: "Release Source"
+            package_name: "@latestversion"
+        - dop/upgrade:
+            project_name: "Development"
+            environment_name: "QA_Env_1"
+            package_name: "@latestversion"
+        - dop/transfer-up-package:
+            project_name: "Development"
+            target_project_name: "Release"
+            source_package: "@latestversion"
+            version_level: "MINOR"
+        - dop/upgrade:
+            project_name: "Release"
+            environment_name: "Release Source"
+            package_name: "@latestversion"
+        - dop/upgrade:
+            project_name: "Release"
+            environment_name: "Prod_Env_1"
+            package_name: "@latestversion"
