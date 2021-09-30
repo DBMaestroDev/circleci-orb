@@ -45,6 +45,10 @@ parameters:
     type: string
     default: ""
     description: "DBmaestro username"
+  password:
+    type: env_var_name
+    default: "DBMAESTRO_PASSWORD"
+    description: "DBmaestro password"
 steps:
   - run:
       environment:
@@ -58,5 +62,6 @@ steps:
         DBM_USE_SSL: << parameters.use_ssl >>
         DBM_AUTH_TYPE: << parameters.auth_type >>
         DBM_USERNAME: << parameters.username >>
+        DBM_PASSWORD: << parameters.password >>
       name: Transfer down package
       command: <<include(scripts/transfer-down-package.sh)>>
