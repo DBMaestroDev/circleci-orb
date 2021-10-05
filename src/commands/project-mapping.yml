@@ -5,8 +5,8 @@ description: >
 
 parameters:
   tool_path:
-    type: string
-    default: ""
+    type: env_var_name
+    default: "DBMAESTRO_TOOL_PATH"
     description: "Path where the DBmaestroAgent.jar is located"
   project_name:
     type: string
@@ -29,22 +29,20 @@ parameters:
     default: "False"
     enum: ["True", "False"]
   server_address:
-    type: string
-    default: ""
+    type: env_var_name
+    default: "DBMAESTRO_SERVER_ADDRESS"
     description: "DBmaestro server address"
   use_ssl:
-    type: enum
+    type: env_var_name
     description: "Use or don't use SSL/https protocol to connect to the DBmaestro agent. Default is n."
-    default: ""
-    enum: ["y", "n", ""]
+    default: "DBMAESTRO_USE_SSL"
   auth_type:
-    type: enum
-    default: ""
+    type: env_var_name
+    default: "DBMAESTRO_AUTH_TYPE"
     description: "DBmaestro auth type"
-    enum: ["DBmaestroAccount", "DomainLogin", ""]
   username:
-    type: string
-    default: ""
+    type: env_var_name
+    default: "DBMAESTRO_USERNAME"
     description: "DBmaestro username"
   password:
     type: env_var_name
@@ -53,16 +51,16 @@ parameters:
 steps:
   - run:
       environment:
-        DBM_TOOL_PATH: << parameters.tool_path >>
+        PDBM_TOOL_PATH: << parameters.tool_path >>
         DBM_PROJECT_NAME: << parameters.project_name >>
         DBM_TARGET_PROJECT_NAME: << parameters.target_project_name >>
         DBM_SCHEMA_MAP: << parameters.schema_map >>
         DBM_TRANSFER_OPENED_PACKAGE: << parameters.transfer_opened_package >>
         DBM_KEEP_STATE: << parameters.keep_state >>
-        DBM_SERVER_ADDRESS: << parameters.server_address >>
-        DBM_USE_SSL: << parameters.use_ssl >>
-        DBM_AUTH_TYPE: << parameters.auth_type >>
-        DBM_USERNAME: << parameters.username >>
+        PDBM_SERVER_ADDRESS: << parameters.server_address >>
+        PDBM_USE_SSL: << parameters.use_ssl >>
+        PDBM_AUTH_TYPE: << parameters.auth_type >>
+        PDBM_USERNAME: << parameters.username >>
         DBM_PASSWORD: << parameters.password >>
       name: Project mapping
       command: <<include(scripts/project-mapping.sh)>>
