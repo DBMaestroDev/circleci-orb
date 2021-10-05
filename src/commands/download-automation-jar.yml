@@ -10,6 +10,6 @@ parameters:
 steps:
   - run:
       environment:
-        PARAM_PDBM_TOOL_PATH: << parameters.tool_path >>
+        PDBM_TOOL_PATH: << parameters.tool_path >>
       name: Download Agent
       command: <<include(scripts/download-agent.sh)>>
