@@ -12,7 +12,7 @@ description: >
 usage:
   version: 2.1
   orbs:
-    dop: dbmaestro/devops-automation@0.0.7
+    dop: dbmaestro/devops-automation@1.0.0
   jobs:
     dbm-deploy:
       docker:
