@@ -1,6 +1,5 @@
 Download(){
-export DBM_TOOL_PATH=${PARAM_DBM_TOOL_PATH}
-if [ -z "${DBM_TOOL_PATH:=${DBMAESTRO_TOOL_PATH:-'tools/dbmaestro'}}" ]; then echo "DBmaestro tool path is not set"&&exit 1; fi
+if [ -z "${DBM_TOOL_PATH:=${!PDBM_TOOL_PATH:-'tools/dbmaestro'}}" ]; then echo "DBmaestro tool path is not set"&&exit 1; fi
 #Check if dbmaestroagent.jar already exists
 if [ -f "${DBM_TOOL_PATH}/DBmaestroAgent.jar" ]; then
     echo "${DBM_TOOL_PATH}/DBmaestroAgent.jar already exists."

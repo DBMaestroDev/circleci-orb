@@ -4,12 +4,12 @@ description: >
 
 parameters:
   tool_path:
-    type: string
-    default: ""
+    type: env_var_name
+    default: "DBMAESTRO_TOOL_PATH"
     description: "Path where the DBmaestroAgent.jar is located"
 steps:
   - run:
       environment:
-        PARAM_DBM_TOOL_PATH: << parameters.tool_path >>
+        PDBM_TOOL_PATH: << parameters.tool_path >>
       name: Download Agent
       command: <<include(scripts/download-agent.sh)>>

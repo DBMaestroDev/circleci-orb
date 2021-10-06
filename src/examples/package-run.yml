@@ -13,36 +13,34 @@ description: >
 usage:
   version: 2.1
   orbs:
-    dop: dbmaestro/devops-automation@0.0.7
-
-workflows:
-  test-run:
-    jobs:
-      - dbm-deploy
-
-jobs:
-  dbm-deploy:
-    docker:
-      - image: cimg/openjdk:16.0.2
-    environment:
-      DBMAESTRO_SERVER_ADDRESS: "dbm.automation.host:8017"
-      DBMAESTRO_USERNAME: "test@dbmaestro.com"
-      DBMAESTRO_AUTH_TYPE: "DBmaestroAccount"
-    steps:
-      - checkout
-      - dop/download-automation-jar
-      - dop/create-manifest-file:
-          path_to_scripts_folder: "V3"
-      - run:
-        command: cd V3&&zip -r ../V3.zip *&&cd ..
-        name: Zip the package
-      - dop/package:
-          project_name: "DEMO"
-          file_path: "V3.zip"
-      - dop/pre-check:
-          project_name: "DEMO"
-          package_name: "V3"
-      - dop/upgrade:
-          project_name: "DEMO"
-          environment_name: "Release Source"
-          package_name: "V3"
+    dop: dbmaestro/devops-automation@1.0.0
+  jobs:
+    dbm-deploy:
+      docker:
+        - image: cimg/openjdk:16.0.2
+      environment:
+        DBMAESTRO_SERVER_ADDRESS: "dbm.automation.host:8017"
+        DBMAESTRO_USERNAME: "test@dbmaestro.com"
+        DBMAESTRO_AUTH_TYPE: "DBmaestroAccount"
+      steps:
+        - checkout
+        - dop/download-automation-jar
+        - dop/create-manifest-file:
+            path_to_scripts_folder: "V3"
+        - run:
+            command: cd V3&&zip -r ../V3.zip *&&cd ..
+            name: Zip the package
+        - dop/package:
+            project_name: "DEMO"
+            file_path: "V3.zip"
+        - dop/pre-check:
+            project_name: "DEMO"
+            package_name: "V3"
+        - dop/upgrade:
+            project_name: "DEMO"
+            environment_name: "Release Source"
+            package_name: "V3"
+  workflows:
+    test-run:
+      jobs:
+        - dbm-deploy
