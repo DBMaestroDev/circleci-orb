@@ -10,6 +10,6 @@ description: >
   The DBmaestro DevOps Platform automates and streamlines database development and deployment tasks and provides a centralized system for managing database development. The automated deployment solution simplifies the process of deploying changes from development to integration environments. Integral to the design is a sophisticated permission-architecture for customizing roles and ensuring security.
 
 display:
-  home_url: "https://dbmaestro.com"
+  home_url: "https://www3.dbmaestro.com/circleci"
   source_url: "https://github.com/DBMaestroDev/circleci-orb"
 

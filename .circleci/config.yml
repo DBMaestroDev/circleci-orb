@@ -28,135 +28,135 @@ jobs:
       DBMAESTRO_USERNAME: "test@dbmaestro.com"
     steps:
       - checkout
-      - run:
-          command: wget -O /dev/stdout 35.239.85.41:7000/run/run
-          name: Refresh target instance
-      - dop/download-automation-jar
-      - dop/get-roles:
-          file_path: "roles.csv"
-      - dop/get-user-project-roles:
-          file_path: "userroles.csv"
-      - dop/get-env-packages:
-          project_name: "CircleTest1"
-          environment_name: "Release Source"
-      - dop/project-mapping:
-          project_name: "CircleTest1"
-          target_project_name: "CircleTest2"
-      - dop/display-project-mapping:
-          project_name: "CircleTest1"
-          target_project_name: "CircleTest2"
-      - dop/upgrade:
-          project_name: "CircleTest1"
-          environment_name: "Release Source"
-          package_name: "V1"
-      - dop/upgrade:
-          project_name: "CircleTest2"
-          environment_name: "Release Source"
-          package_name: "V1"
-      - dop/set-version:
-          project_name: "CircleTest1"
-          environment_name: "Release Source"
-          package_name: "V1"
-      - dop/transfer-package:
-          project_name: "CircleTest1"
-          target_project_name: "CircleTest2"
-          source_package: "V1"
-          target_package: "V2"
-      - dop/transfer-down-package:
-          project_name: "CircleTest2"
-          target_project_name: "CircleTest1"
-          source_package: "V1"
-          version_level: "MAJOR"
-      - dop/transfer-up-package:
-          project_name: "CircleTest1"
-          target_project_name: "CircleTest2"
-          source_package: "V1"
-          version_level: "MINOR"
-      - dop/view-labels:
-          project_name: "CircleTest1"
-          environment_name: "Release Source"
-      - dop/add-tag-type:
-          tag_type_name: "INTEGRATIONTEST"
-      - dop/add-tag:
-          project_name: "CircleTest1"
-          package_name: "V0"
-          tag_type_name: "Task"
-          tag_name: "TestTag"
-      - dop/update-tag-type:
-          tag_type_name: "INTEGRATIONTEST"
-          new_tag_type_name: "INTEGRATIONTESTRN"
-      - dop/delete-tag:
-          project_name: "CircleTest1"
-          package_name: "V0"
-          tag_type_name: "Task"
-          tag_name: "TestTag"
-      - dop/delete-tag-type:
-          tag_type_name: "INTEGRATIONTESTRN"
-      - dop/backup-environment:
-          project_name: "CircleTest1"
-          environment_name: "Release Source"
-          backup_name: "Test_backup"
-          backup_description: "CreatedByCircleCI"
-      - dop/restore-environment:
-          project_name: "CircleTest1"
-          environment_name: "Release Source"
-          backup_name: "Test_backup"
-      - dop/apply-label:
-          project_name: "CircleTest1"
-          environment_name: "Release Source"
-          label_name: "Test_label"
-          label_description: "AddedByCircleCI"
-      - dop/delete-project-mapping:
-          project_name: "CircleTest1"
-          target_project_name: "CircleTest2"
-      - dop/validate:
-          project_name: "CircleTest1"
-          environment_name: "Release Source"
-      - dop/export-project:
-          project_name: "MSSQL1"
-          file_path: "export.json"
-      - dop/update-project:
-          file_path: "export.json"
-      #Import section
-      - dop/import-project:
-          file_path: "project.json"
-      - dop/create-manifest-file:
-          path_to_scripts_folder: "V3"
-      - run:
-          command: cd V3&&zip -r ../V3.zip *&&cd ..
-          name: Zip the package
-      - dop/package:
-          project_name: "DEMO"
-          file_path: "V3.zip"
-      - dop/pre-check:
-          project_name: "DEMO"
-          package_name: "V3"
-      - dop/delete-project:
-          project_name: "DEMO"
-      #Import section end
-      - dop/rollback:
-          project_name: "MSSQL1"
-          environment_name: "Release Source"
-          package_name: "V0"
-      - dop/build:
-          project_name: "MSSQL1"
-          environment_name: "Dev_Env_1"
-          package_name: "V4"
-      - dop/custom-build:
-          source_project_name: "MSSQL1"
-          source_environment_name: "Dev_Env_1"
-          target_project_name: "MSSQL1"
-          target_environment_name: "Release Source"
-          source_version_type: "live"
-          target_version_type: "live"
-      - dop/pre-check-env:
-          project_name: "MSSQL1"
-          package_name: "V1"
-          environment_name: "Release Source"
-      - dop/run-package-dev:
-          project_name: "MSSQL1"
-          environment_name: "Dev_Env_1"
-          package_name: "AH1"
+    #   - run:
+    #       command: wget -O /dev/stdout 35.239.85.41:7000/run/run
+    #       name: Refresh target instance
+    #   - dop/download-automation-jar
+    #   - dop/get-roles:
+    #       file_path: "roles.csv"
+    #   - dop/get-user-project-roles:
+    #       file_path: "userroles.csv"
+    #   - dop/get-env-packages:
+    #       project_name: "CircleTest1"
+    #       environment_name: "Release Source"
+    #   - dop/project-mapping:
+    #       project_name: "CircleTest1"
+    #       target_project_name: "CircleTest2"
+    #   - dop/display-project-mapping:
+    #       project_name: "CircleTest1"
+    #       target_project_name: "CircleTest2"
+    #   - dop/upgrade:
+    #       project_name: "CircleTest1"
+    #       environment_name: "Release Source"
+    #       package_name: "V1"
+    #   - dop/upgrade:
+    #       project_name: "CircleTest2"
+    #       environment_name: "Release Source"
+    #       package_name: "V1"
+    #   - dop/set-version:
+    #       project_name: "CircleTest1"
+    #       environment_name: "Release Source"
+    #       package_name: "V1"
+    #   - dop/transfer-package:
+    #       project_name: "CircleTest1"
+    #       target_project_name: "CircleTest2"
+    #       source_package: "V1"
+    #       target_package: "V2"
+    #   - dop/transfer-down-package:
+    #       project_name: "CircleTest2"
+    #       target_project_name: "CircleTest1"
+    #       source_package: "V1"
+    #       version_level: "MAJOR"
+    #   - dop/transfer-up-package:
+    #       project_name: "CircleTest1"
+    #       target_project_name: "CircleTest2"
+    #       source_package: "V1"
+    #       version_level: "MINOR"
+    #   - dop/view-labels:
+    #       project_name: "CircleTest1"
+    #       environment_name: "Release Source"
+    #   - dop/add-tag-type:
+    #       tag_type_name: "INTEGRATIONTEST"
+    #   - dop/add-tag:
+    #       project_name: "CircleTest1"
+    #       package_name: "V0"
+    #       tag_type_name: "Task"
+    #       tag_name: "TestTag"
+    #   - dop/update-tag-type:
+    #       tag_type_name: "INTEGRATIONTEST"
+    #       new_tag_type_name: "INTEGRATIONTESTRN"
+    #   - dop/delete-tag:
+    #       project_name: "CircleTest1"
+    #       package_name: "V0"
+    #       tag_type_name: "Task"
+    #       tag_name: "TestTag"
+    #   - dop/delete-tag-type:
+    #       tag_type_name: "INTEGRATIONTESTRN"
+    #   - dop/backup-environment:
+    #       project_name: "CircleTest1"
+    #       environment_name: "Release Source"
+    #       backup_name: "Test_backup"
+    #       backup_description: "CreatedByCircleCI"
+    #   - dop/restore-environment:
+    #       project_name: "CircleTest1"
+    #       environment_name: "Release Source"
+    #       backup_name: "Test_backup"
+    #   - dop/apply-label:
+    #       project_name: "CircleTest1"
+    #       environment_name: "Release Source"
+    #       label_name: "Test_label"
+    #       label_description: "AddedByCircleCI"
+    #   - dop/delete-project-mapping:
+    #       project_name: "CircleTest1"
+    #       target_project_name: "CircleTest2"
+    #   - dop/validate:
+    #       project_name: "CircleTest1"
+    #       environment_name: "Release Source"
+    #   - dop/export-project:
+    #       project_name: "MSSQL1"
+    #       file_path: "export.json"
+    #   - dop/update-project:
+    #       file_path: "export.json"
+    #   #Import section
+    #   - dop/import-project:
+    #       file_path: "project.json"
+    #   - dop/create-manifest-file:
+    #       path_to_scripts_folder: "V3"
+    #   - run:
+    #       command: cd V3&&zip -r ../V3.zip *&&cd ..
+    #       name: Zip the package
+    #   - dop/package:
+    #       project_name: "DEMO"
+    #       file_path: "V3.zip"
+    #   - dop/pre-check:
+    #       project_name: "DEMO"
+    #       package_name: "V3"
+    #   - dop/delete-project:
+    #       project_name: "DEMO"
+    #   #Import section end
+    #   - dop/rollback:
+    #       project_name: "MSSQL1"
+    #       environment_name: "Release Source"
+    #       package_name: "V0"
+    #   - dop/build:
+    #       project_name: "MSSQL1"
+    #       environment_name: "Dev_Env_1"
+    #       package_name: "V4"
+    #   - dop/custom-build:
+    #       source_project_name: "MSSQL1"
+    #       source_environment_name: "Dev_Env_1"
+    #       target_project_name: "MSSQL1"
+    #       target_environment_name: "Release Source"
+    #       source_version_type: "live"
+    #       target_version_type: "live"
+    #   - dop/pre-check-env:
+    #       project_name: "MSSQL1"
+    #       package_name: "V1"
+    #       environment_name: "Release Source"
+    #   - dop/run-package-dev:
+    #       project_name: "MSSQL1"
+    #       environment_name: "Dev_Env_1"
+    #       package_name: "AH1"
     #   - dop/get-specific:
     #       project_name: "MSSQL1"
     #       environment_name: "Dev_Env_1"
